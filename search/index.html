@@ -8,11 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="热爱生活，追求智慧。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="我的小站">
-<meta property="og:url" content="https://a-fly-fly-bird.github.io/project/archives/2022/07/index.html">
+<meta property="og:title" content="search">
+<meta property="og:url" content="https://a-fly-fly-bird.github.io/project/search/index.html">
 <meta property="og:site_name" content="我的小站">
 <meta property="og:description" content="热爱生活，追求智慧。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-07T14:00:07.000Z">
+<meta property="article:modified_time" content="2022-07-07T14:00:24.931Z">
 <meta property="article:author" content="James Tan">
 <meta name="twitter:card" content="summary">
     
@@ -34,7 +36,7 @@
       
     
     <!-- title -->
-    <title>归档: 2022/7</title>
+    <title>search</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/project/css/style.css">
@@ -88,42 +90,22 @@
 </header>
 
         
-        <div id="archive">
-  <ul class="post-list">
-    
-    
-    
-    
-      
-      
-      
-      
-        <li class="post-year"><h2>2022</h2></li>
-      
-      <li class="post-item">
-        
-    <div class="meta">
-      
-        
-          <time datetime="2022-07-06T16:10:15.162Z" itemprop="datePublished">2022-07-07</time>
-        
-      
-    </div>
-
-
-        <span>
-    
-        <a class="" href="/project/2022/07/07/hello-world/">Hello World</a>
-    
-
-
-</span>
-      </li>
-    
-  </ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   
 
-</div>
+  <div class="content" itemprop="articleBody">
+      
+        <section id="search">
+  <form>
+    <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+  </form>
+  <div id="search-result"></div>
+  <p class="search-no-result">抱歉，没有符合您搜索条件的结果。请换其它关键词再试。</p>
+</section>
+
+      
+  </div>
+</article>
 
         
         <footer id="footer">
@@ -178,6 +160,45 @@
 <script src="/project/js/main.js"></script>
 
 <!-- search -->
+
+  
+<script src="/project/js/search.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+    var $inputArea = $("input#search-input");
+    var $resultArea = document.querySelector("div#search-result");
+
+    $inputArea.focus(function() {
+      var search_path = "search.xml";
+      if (search_path.length == 0) {
+        search_path = "search.xml";
+      }
+      var path = "/project/" + search_path;
+      searchFunc(path, 'search-input', 'search-result');
+    });
+
+    $inputArea.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+      }
+    });
+
+    var observer = new MutationObserver(function(mutationsList, observer) {
+      if (mutationsList.length == 1) {
+        if (mutationsList[0].addedNodes.length) {
+          $(".search-no-result").hide();
+        } else if (mutationsList[0].removedNodes.length) {
+          $(".search-no-result").show(200);
+        }
+      }
+    });
+
+    observer.observe($resultArea, { childList: true });
+
+  });
+  </script>
 
 <!-- Google Analytics -->
 
